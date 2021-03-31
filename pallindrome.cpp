@@ -14,11 +14,9 @@ public:
         if(x < 0){
             return false;
         }
-        int count = 0;
         int temp = x;
         int temp1;
-        temp = x;
-        long long res = 0;
+        long  res = 0;
         //count = count - 1;
         while(temp != 0 && res < INT_MAX){
             temp1 = temp%10;
