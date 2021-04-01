@@ -1,9 +1,16 @@
 class Solution {
 public:
     bool isMatch(string s, string p) {
-        int s_len = s.size();
-        int p_len = p.size();
-        vector<vector<bool>> A(p_len+1,vector<bool>(s_len+1,0));
+        //int s_len = s.size();
+        //int p_len = p.size();
+        /*
+        case:
+            p[i] = s[j] : check diagonally up
+            p[i] != s[j] : False
+            p[i] = . : check diagonally up
+            p[i] = * : default 2 rows up; if p[i-1] = s[j] || p[i-1] = . : check one column left or 2 rows up(jo bhi true hoga wo select krne ka)
+        */
+        vector<vector<bool>> A(p.length()+1,vector<bool>(s.length()+1,0));
         A[0][0] = 1;
         for(int i = 0; i < A.size(); i++){
             for(int j = 0; j < A[i].size(); j++){
@@ -37,6 +44,6 @@ public:
                 }
             }
         }
-        return A[p_len][s_len];
+        return A[p.length()][s.length()];
     }
 };
