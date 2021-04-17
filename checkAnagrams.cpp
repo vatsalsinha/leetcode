@@ -5,6 +5,7 @@ public:
         unordered_map<string, vector<string>> mp;
         vector<vector<string>> ans;
         // sort the strings and check for anagrams. pairs have same character count
+        //aet:eat aet:tea ant:tan aet:tan ant:ate aet:ate ant:nat aet:nat abt:bat aet:bat ant:bat 
         for(int i = 0; i < tmp.size(); i++){
             sort(tmp[i].begin(), tmp[i].end());
         }
