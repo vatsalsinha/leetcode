@@ -11,27 +11,27 @@ public:
         while(count <= tot){
             //min row ----->>
             for(int i = min_row, j = min_col; j <= max_col && count <= tot; j++){
-                res[min_row][j] = count++;
+                res[i][j] = count++;
                
             }
             min_row++;
             //max_col |
             //        v 
             for(int i = min_row, j = max_col; i <= max_row && count <= tot; i++){
-                res[i][max_col] = count++;
+                res[i][j] = count++;
                 
             }
             max_col--; 
             //max_col <-------
             for(int i = max_row, j = max_col; j >= min_col && count <= tot; j--){
-                res[max_row][j] = count++;
+                res[i][j] = count++;
               
             }
             max_row--;   
             //max_row ^
             //        |
             for(int i = max_row, j = min_col; i >= min_row && count <= tot; i--){
-                res[i][min_col] = count++;
+                res[i][j] = count++;
                 
             }
             min_col++;
