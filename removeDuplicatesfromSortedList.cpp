@@ -14,12 +14,9 @@ public:
         if(head == NULL || head->next == NULL)
             return head;
         ListNode *tmp = head;
-        //ListNode *prev = NULL;
-        while(tmp != NULL && tmp->next != NULL){
-            if(tmp->next != NULL && tmp->val == tmp->next->val){
-                while(tmp->next != NULL && tmp->val == tmp->next->val){
-                    tmp->next = tmp->next->next;
-                }
+        while(tmp->next != NULL){
+            if(tmp->val == tmp->next->val){
+               tmp->next = tmp->next->next;
             }
             else{
                 tmp = tmp->next;
