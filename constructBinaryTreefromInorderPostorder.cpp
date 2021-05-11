@@ -12,6 +12,7 @@
 class Solution {
 public:
     TreeNode *solve(vector<int>& inorder, vector<int>& postorder, int &l, int s, int e, unordered_map<int,int>& mp){
+	//s = start e= end
         if(s > e)
             return NULL;
         TreeNode *root = new TreeNode(postorder[l]);
