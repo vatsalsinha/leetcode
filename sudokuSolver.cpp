@@ -9,8 +9,9 @@ public:
             if(board[row][i] == c)
                 return false;
         }
-        int boxR = (row/3) * 3;
-        int boxC = (col/3) * 3;
+        int boxR = (row/3) * 3; // grid
+        int boxC = (col/3) * 3; //grid
+        //check box
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 if(board[boxR + i][boxC + j] == c)
