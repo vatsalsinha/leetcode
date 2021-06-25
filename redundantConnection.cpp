@@ -32,19 +32,20 @@ public:
     // UnionFind solution
     /*
      * Find the subset a vertex belongs to.
+     finds parent of x
      */
-    int find(vector<int>& e, int x){
+    int findParent(vector<int>& e, int x){
         if(e[x] == -1)
             return x;
-        return find(e, e[x]);
+        return e[x] = findParent(e, e[x]); // path compression
     }
     /*
      * Unionize two subsets. 
      */
     void _union(vector<int>& e, int x, int y){
-        int xp = find(e, x);
-        int yp = find(e, y);
-        if(xp != yp)
+        int xp = findParent(e, x);
+        int yp = findParent(e, y);
+        if(xp != yp) // union should be performed
             e[yp] = xp;
     }
      /*
@@ -66,9 +67,9 @@ public:
          *
          */
         for(int i = 0; i < edges.size(); i++){
-            int x = find(e, edges[i][0]);
-            int y = find(e, edges[i][1]);
-            if(x == y)
+            int x = findParent(e, edges[i][0]);
+            int y = findParent(e, edges[i][1]);
+            if(x == y) // there exists a cycle
                 return {edges[i][0], edges[i][1]};
             _union(e, x, y);
         }
