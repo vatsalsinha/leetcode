@@ -36,8 +36,6 @@ public:
         return matrix[r][c];
     }
     */
-    
-    // DYNAMIC PROGramming
     vector<vector<int> > updateMatrix(vector<vector<int> >& matrix)
 {
     int rows = matrix.size();
@@ -73,3 +71,53 @@ public:
     return dist;
     }
 };
+
+// BFS
+/*class Solution {
+public:
+    struct cell{
+        int r, c, d;
+    };
+    cell createCell(int row, int col, int dist){
+        cell a;
+        a.r = row;
+        a.c = col;
+        a.d = dist;
+        return a;
+    }
+    bool isValid(cell a, int n, int m){
+        return a.r >= 0 && a.r < n && a.c >= 0 && a.c < m;
+    }
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int n = mat.size(); int m = mat[0].size();
+        vector<vector<int>> visited(n, vector<int>(m, 0));
+        vector<vector<int>> ans(n, vector<int>(m, INT_MAX));
+        queue<cell> q;
+        vector<vector<int>> directions{{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(mat[i][j] == 0){
+                    visited[i][j] = 1;
+                    ans[i][j] = 0;
+                    q.push(createCell(i, j, 0));
+                }
+            }
+        }
+        while(!q.empty()){
+            auto x = q.front();
+            q.pop();
+            for(auto dir : directions){
+                    cell adj = createCell(x.r + dir[0], x.c + dir[1], x.d+1);
+                    if(isValid(adj,n,m) && !visited[adj.r][adj.c]){
+                        visited[adj.r][adj.c] = 1;
+                        if(ans[adj.r][adj.c] > ans[x.r][x.c] + 1){
+                            ans[adj.r][adj.c] = ans[x.r][x.c] + 1;
+                            q.push(adj);
+                        }
+                    }
+                }
+        }
+        return ans;
+    }
+};
+*/
