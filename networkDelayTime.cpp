@@ -1,6 +1,6 @@
 class Solution {
 public:
-    //Dijkstra:
+    //Dijkstra algorithm:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         vector<pair<int, int>> adj[n+1]; //node:dist;
         for(auto t : times){
