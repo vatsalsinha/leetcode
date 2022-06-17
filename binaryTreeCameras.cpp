@@ -14,8 +14,8 @@ public:
     /* 
     Here we follow the bottom up approach. 
     any node can have 3 states:
-        1. it is covered by the camera 0
-        2. it itself is a camera ie 1
+        1. it is covered by the camera 1
+        2. it itself is a camera ie 0
         3. it requires a camera ie -1
     start filling in the camera from the leaf nodes. 
     */
