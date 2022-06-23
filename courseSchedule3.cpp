@@ -21,6 +21,6 @@ public:
                 pq.push(course[0]);
             }
         }
-        return pq.size();
+        return pq.size(); // returning the no. of courses which can be done
     }
 };
