@@ -1,5 +1,64 @@
 class Solution {
 public:
+    //Graham Scan Algorithm: 
+    int orientation(vector<int> p, vector<int> q, vector<int> r) {
+        return (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1]);
+    }
+    int distance(vector<int> p, vector<int> q) {
+        return (p[0] - q[0]) * (p[0] - q[0]) + (p[1] - q[1]) * (p[1] - q[1]);
+    }
+
+    vector<int> bottomLeft(vector<vector<int>> points) {
+        vector<int> bottomLeft = points[0];
+        for (auto p: points)
+            if (p[1] < bottomLeft[1])
+                bottomLeft = p;
+        return bottomLeft;
+    }
+    vector<vector<int>> outerTrees(vector<vector<int>>& points) {
+        if(points.size() <= 1)
+            return points;
+        vector<int> bm = bottomLeft(points);
+        sort(points.begin(), points.end(), [&](const vector<int>& p,const vector<int>& q) {
+                double diff = orientation(bm, p, q) - orientation(bm, q, p);
+                if (diff == 0)
+                    return distance(bm, p) < distance(bm, q);
+                else
+                    return diff < 0;
+            });
+        int i = points.size() - 1;
+        while (i >= 0 && orientation(bm, points[points.size() - 1], points[i]) == 0)
+            i--;
+        for (int l = i + 1, h = points.size() - 1; l < h; l++, h--) {
+            vector<int> temp = points[l];
+            points[l] = points[h];
+            points[h] = temp;
+        }
+        stack<vector<int>> st;
+        st.push(points[0]);
+        st.push(points[1]);
+        for (int j = 2; j < points.size(); j++) {
+            vector<int> top = st.top();
+            st.pop();
+            while (orientation(st.top(), top, points[j]) > 0){
+                top = st.top();
+                st.pop();
+            }
+            st.push(top);
+            st.push(points[j]);
+        }
+        vector<vector<int>> ans;
+        while(!st.empty()){
+            auto p = st.top();
+            ans.push_back({p[0], p[1]});
+            st.pop();
+        }
+        return ans;
+    }
+};
+/* Jarvis March Algorithm is giving TLE, thus using Graham Scan algorithm
+class Solution {
+public:
     struct Point{
         int x;
         int y;
@@ -71,4 +130,4 @@ public:
         // }
         return ans; 
     }
-};
+}; */
