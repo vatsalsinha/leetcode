@@ -1,6 +1,18 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
+        if(nums.size() == 0) return {-1, -1};
+        auto x = lower_bound(nums.begin(), nums.end(), target);
+        auto y = upper_bound(nums.begin(), nums.end(), target);
+        if(x == nums.end() || *x != target)
+            return {-1, -1};
+        return {(int)(x-nums.begin()), (int)(y-nums.begin()-1)};
+    }
+};
+
+/* class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
 //         vector<int> ans(2, -1);
 //         int l = 0, r = nums.size()-1;
 //         int c = count(nums.begin(), nums.end(), target);
@@ -59,3 +71,4 @@ public:
         return ans;
     }
 };
+*/
